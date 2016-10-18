@@ -258,6 +258,8 @@ if (method_exists($me, "dance")) {
   echo "and I know how to dance!";
 }
 output:
-I'm a person, I have a name, and I know how to dance!
+I m a person, I have a name, and I know how to dance!
+
+//===>
 
 ?>
