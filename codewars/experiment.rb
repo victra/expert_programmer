@@ -192,3 +192,22 @@ end
 describe "Solution" do
   Test.assert_equals(two_highest([15, 20, 20, 17]), [20, 17])
 end
+
+#string to array to string
+def sort_my_string(s)
+    b = []
+    c = []
+    a = s.chars
+    for x in 0..a.length-1
+      x%2==0 ? b << a[x] : c << a[x] 
+    end
+    return "#{b.join("")} #{c.join("")}"
+end
+#test
+describe "Example Tests" do
+  it "Simple Cases" do
+    Test.assert_equals(sort_my_string("CodeWars"), "CdWr oeas")
+    Test.assert_equals(sort_my_string("YCOLUE'VREER"), "YOU'RE CLEVER")
+  end
+end
+

@@ -260,6 +260,54 @@ if (method_exists($me, "dance")) {
 output:
 I m a person, I have a name, and I know how to dance!
 
-//===>
+//===> cheking class
+class Shape {
+  public $hasSides = true;
+}
+class Square extends Shape {
+
+}
+$square = new Square();
+if (property_exists($square, 'hasSides')) {
+  echo "I have sides!";
+}
+output:
+I have sides!
+
+//===> overide class / extends
+class Vehicle {
+  public function honk() {
+    return "HONK HONK!";
+  }
+}
+class Bicycle extends Vehicle {
+   public function honk() {
+      return "Beep beep!";   
+   }
+}
+$bicycle = new Bicycle();
+echo $bicycle->honk();
+output:
+Beep beep!
+
+//===> call const
+class Ninja extends Person {
+  const stealth = "MAXIMUM";
+}
+echo Ninja::stealth;
+output:
+MAXIMUM
+
+//===> const
+class King {
+  public static function proclaim() {
+    echo "A kingly proclamation!";
+  }
+}
+King::proclaim()
+output:
+A kingly proclamation!
+
+//===> 
 
 ?>
