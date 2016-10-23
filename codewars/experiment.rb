@@ -197,17 +197,85 @@ end
 def sort_my_string(s)
     b = []
     c = []
-    a = s.chars
+    a = s.chars #string to array
     for x in 0..a.length-1
       x%2==0 ? b << a[x] : c << a[x] 
     end
     return "#{b.join("")} #{c.join("")}"
+end
+def sort_my_string(s)
+    b = []
+    c = []
+    a = s.chars
+    for x in 0..a.length-1
+      x%2==0 ? b << a[x] : c << a[x] 
+    end
+    return b.join("") + " " + c.join("")
 end
 #test
 describe "Example Tests" do
   it "Simple Cases" do
     Test.assert_equals(sort_my_string("CodeWars"), "CdWr oeas")
     Test.assert_equals(sort_my_string("YCOLUE'VREER"), "YOU'RE CLEVER")
+  end
+end
+
+#count monkey
+def monkey_count(n)
+a =[]
+  for x in 1..n 
+    a << x 
+  end
+  return a
+end
+#other way
+def monkey_count(n)
+  Array(1..n)
+end
+#testTest.assert_equals(monkey_count(5), [1, 2, 3, 4, 5])
+Test.assert_equals(monkey_count(3), [1, 2, 3])
+
+#check sort array
+def is_sorted_and_how(arr)
+    xasc = arr.sort
+    xdesc = xasc.reverse
+    return arr == xasc ? 'yes, ascending' : arr == xdesc ? 'yes, descending' : 'no'
+end
+#test
+describe "is_sorted_and_how" do
+  it "Example Tests" do
+    Test.assert_equals(is_sorted_and_how([1, 2]), 'yes, ascending')
+    Test.assert_equals(is_sorted_and_how([15, 7, 3, -8]), 'yes, descending')
+    Test.assert_equals(is_sorted_and_how([4, 2, 30]), 'no')
+  end
+end
+
+#sum of pop
+def sum_triangular_numbers(n)
+    x = 0
+    a = []
+    if n < 0 then return 0 end
+    for i in 1..n
+      a << x += i
+    end
+    return a.inject{ |sum,x| sum+x}
+end
+#do this
+[01]
+02 [03]
+04 05 [06]
+07 08 09 [10]
+11 12 13 14 [15]
+16 17 18 19 20 [21]
+e.g. If 4 is given: 1 + 3 + 6 + 10 = 20
+#test
+describe "Example Tests" do
+  it "Some Cases" do
+    Test.assert_equals(sum_triangular_numbers(6), 56)
+    Test.assert_equals(sum_triangular_numbers(34), 7140)
+    Test.assert_equals(sum_triangular_numbers(-291), 0)
+    Test.assert_equals(sum_triangular_numbers(943), 140205240)
+    Test.assert_equals(sum_triangular_numbers(-971), 0)
   end
 end
 
