@@ -268,6 +268,8 @@ end
 11 12 13 14 [15]
 16 17 18 19 20 [21]
 e.g. If 4 is given: 1 + 3 + 6 + 10 = 20
+#other way 
+n < 0 ? 0 : n * (n + 1) * (n + 2) / 6
 #test
 describe "Example Tests" do
   it "Some Cases" do
@@ -278,4 +280,21 @@ describe "Example Tests" do
     Test.assert_equals(sum_triangular_numbers(-971), 0)
   end
 end
+
+#write same letter x time
+def pattern(n)
+  s = []
+  for i in 1..n
+    s << "#{i}" * i
+  end
+  return s.join("\n")
+end
+#other way
+def pattern(n)
+  (1..n).map{|x| x.to_s*x}.join("\n")
+end
+#test
+Test.assert_equals(pattern(5),"1\n22\n333\n4444\n55555")
+Test.assert_equals(pattern(1),"1")
+Test.assert_equals(pattern(2),"1\n22")
 
