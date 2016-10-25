@@ -298,3 +298,133 @@ Test.assert_equals(pattern(5),"1\n22\n333\n4444\n55555")
 Test.assert_equals(pattern(1),"1")
 Test.assert_equals(pattern(2),"1\n22")
 
+https://www.codewars.com/kata/get-list-sum-recursively/train/ruby
+#sum element array
+def sum_r(x)
+  return 0 if x.length == 0
+  s=0
+  x.each {|z|s+=z}
+  return s
+end
+#test
+describe "sum_r" do
+  it "should add values in a given list" do
+    Test.assert_equals(sum_r([]), 0, "Empty case not implemented")
+    Test.assert_equals(sum_r([1]), 1, "Single value case not implemented")
+    Test.assert_equals(sum_r([1,1,1]), 3)
+  end
+end
+
+#count letter on string
+def bump(x)
+  x.scan(/n/).count > 15 ? "Car Dead" : "Woohoo!"
+end 
+#test
+describe "Basic tests" do 
+  Test.assert_equals(bump("n"), "Woohoo!")
+  Test.assert_equals(bump("_nnnnnnn_n__n______nn__nn_nnn"), "Car Dead")
+  Test.assert_equals(bump("______n___n_"), "Woohoo!")
+  Test.assert_equals(bump("nnnnnnnnnnnnnnnnnnnnn"), "Car Dead")
+end
+
+https://www.codewars.com/kata/broken-collatz/train/ruby
+#
+def collatz(n)
+      if n % 2 != 0
+        n = n / 2
+      else
+        n = (n * 3 + 1)
+        n < 10 ? n = n : n = n-10
+      end
+  return n
+end
+#test
+def testing(actual, expected, msg = nil)
+    Test.assert_equals actual, expected, msg
+end
+Test.describe "collatz()" do
+  Test.it "Example tests" do
+    testing collatz(2), 2
+    testing collatz(4), 3
+    testing collatz(6), 9
+  end
+end
+
+#reverse string with split
+def reverser(sentence)
+  s = sentence.split(" ")
+  return  sentence == " " ? " " : (s.each{|x|x.reverse!}).join(" ")
+end
+#other way
+def reverser(sentence)
+  return ' ' if sentence == ' '
+  sentence.split.map(&:reverse).join(' ')
+end
+#test
+Test.describe("Example test cases") do
+  Test.assert_equals(reverser("Hi mom"), "iH mom")
+  Test.assert_equals(reverser("friendzone"), "enozdneirf")
+  Test.assert_equals(reverser(" "), " ")
+end
+
+#replace every char on string
+def vowel_one(s)
+    s.downcase!
+    for i in 0..s.length-1 
+      if s[i]=="a" or s[i]=="i" or s[i]=="u" or s[i]=="e" or s[i]=="o"
+        s[i]="1"
+      else
+        s[i]="0"
+      end
+    end
+    return s
+end
+#other way
+def vowel_one(s)
+  s.downcase.tr('^aeiou', '0').tr('aeiou', '1')
+end
+#test
+describe "vowelOne" do
+  it "Simple Cases" do
+    Test.assert_equals(vowel_one( "vowelOne" ), "01010101" )
+    Test.assert_equals(vowel_one("123, arou" ), "000001011" )
+  end
+end
+
+https://www.codewars.com/kata/the-office-ii-boredom-score/train/ruby
+#multidimensional array with case
+def boredom(staff)
+  sum = 0
+  staff.each do |x,y|
+    case y
+      when "accounts" then sum+=1
+      when "finance" then sum+=2
+      when "canteen" then sum+=10
+      when "regulation" then sum+=3
+      when "trading" then sum+=6
+      when "change" then sum+=6
+      when "IS" then sum+=8
+      when "retail" then sum+=5
+      when "cleaning" then sum+=4
+      when "pissing about" then sum+=25
+    end
+  end
+  if sum <= 80 then "kill me now"
+  elsif sum < 100 and sum > 80 then "i can handle this"
+  else "party time!!" end
+end
+#test
+Test.describe("Basic tests") do 
+Test.assert_equals(boredom({tim: 'change', jim: 'accounts',
+  randy: 'canteen', sandy: 'change', andy: 'change', katie: 'IS',
+  laura: 'change', saajid: 'IS', alex: 'trading', john: 'accounts',
+  mr: 'finance' }), 'kill me now');
+Test.assert_equals(boredom({ tim: 'IS', jim: 'finance',
+  randy: 'pissing about', sandy: 'cleaning', andy: 'cleaning',
+  katie: 'cleaning', laura: 'pissing about', saajid: 'regulation',
+  alex: 'regulation', john: 'accounts', mr: 'canteen' }), 'i can handle this');
+Test.assert_equals(boredom({ tim: 'accounts', jim: 'accounts',
+  randy: 'pissing about', sandy: 'finance', andy: 'change',
+  katie: 'IS', laura: 'IS', saajid: 'canteen', alex: 'pissing about',
+  john: 'retail', mr: 'pissing about' }), 'party time!!');
+end
