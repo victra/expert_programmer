@@ -1,0 +1,242 @@
+//compile
+sass main.scss main.css
+
+//parent and child
+.test{
+    position: absolute;
+    border: 4px solid black;
+    top: 200px;
+    left: 25%;
+    width: 50%;
+    height: 200px;
+    text-align: center;
+    span{
+      font-size: 24px;
+      line-height: 200px;
+    }
+}
+//css
+.test span {
+  font-size: 24px;
+  line-height: 200px;
+}
+
+//use one parameter
+.test {
+  font-family: 'Pacifico', cursive;
+  height: 400px;
+  background-image: url("lemonade.jpg");
+  border:{
+    top: 4px solid black;
+    bottom: 4px solid black;
+  }
+}
+//css
+.test {
+  font-family: 'Pacifico', cursive;
+  height: 400px;
+  background-image: url("lemonade.jpg");
+  border-top: 4px solid black;
+  border-bottom: 4px solid black;
+}
+
+//use variabel
+$translucent-white:rgba(255,255,255,0.3);
+$standard-border: 4px solid black;
+.test{
+	background-color: $translucent-white;
+	border: $standard-border;
+}
+//css
+.test{
+	background-color: rgba(255, 255, 255, 0.3);
+	border: 4px solid black;
+}
+
+//use mixin
+@mixin transform($transformation) {
+  transform: $transformation;
+  -webkit-transform: $transformation;
+  -moz-transform: $transformation;
+  -ms-transform: $transformation;
+  -o-transform: $transformation;  
+}
+.test {
+	width: 300px;
+	height: 180px;
+	&:hover{
+		@include transform (rotatey(-180deg));  
+	}	
+}
+//css
+.test {
+  width: 300px;
+  height: 180px;
+}
+.test:hover {
+  transform: rotatey(-180deg);
+  -webkit-transform: rotatey(-180deg);
+  -moz-transform: rotatey(-180deg);
+  -ms-transform: rotatey(-180deg);
+  -o-transform: rotatey(-180deg);
+}
+
+//variabel on mixin
+$stripe-properties: to bottom, 15%, blue, white;
+@mixin stripes($direction, $width-percent, $stripe-color, $stripe-background: #FFF) {
+  background: repeating-linear-gradient(
+    $direction,
+    $stripe-background,
+    $stripe-background ($width-percent - 1),
+    $stripe-color 1%,
+    $stripe-background $width-percent
+  );
+}
+.test {
+	width: 100%;
+	height: 100%;
+	@include stripes($stripe-properties...);
+}
+//css
+.test {
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(to bottom, white, white 14%, blue 1%, white 15%);
+}
+
+//use string
+@mixin photo-content($file) {
+  content: url(#{$file}.jpg); //this is ruby???
+  object-fit: cover;
+}
+.image {
+    @include photo-content('titanosaur');
+    width: 60%;
+    margin: 0px auto;  
+}
+//css
+.image {
+  width: 60%;
+  margin: 0px auto;
+  object-fit: cover;
+  content: url(titanosaur.jpg);
+}
+
+//hover in mixin
+@mixin hover-color($color) {
+   &:hover{
+       color: $color;
+   }
+}
+.test {
+	display: block;
+	text-align: center;
+	position: relative;
+	top: 40%;
+	@include hover-color(red);
+}    
+//css
+.test:hover {
+  color: red;
+}
+
+//you can use your math skill
+.test {
+  color: red+blue;
+}
+//css
+.math {
+  color: magenta; //hahahaha
+}
+
+//other math
+$width:250px;
+.math {
+  width: $width;
+  border-radius: $width/6;
+}
+//css
+.math{
+  width:250px;
+  border-radius: 41.66667px;
+}
+
+//use each
+$list: (orange, purple, teal);
+@each $item in $list { //shit this code same with ruby hahaha,.,.
+  .#{$item} {
+    background: $item;
+  }
+}
+//css
+.orange {
+  background: orange;
+}
+.purple {
+  background: purple;
+}
+.teal {
+  background: teal;
+}
+
+//use for
+$total: 10;
+$step: 360deg / $total;
+.test {
+  height: 30px;
+}
+@for $i from 1 through $total {
+  .test:nth-child(#{$i}) {
+    background: adjust-hue(blue, $i * $step);
+   }
+}
+//css
+.test {
+  height: 30px;
+}
+.test:nth-child(1) {
+  background: #9900ff;
+}
+.test:nth-child(2) {
+  background: #ff00cc;
+}
+.test:nth-child(3) {
+  background: #ff0033;
+}
+.test:nth-child(4) {
+  background: #ff6600;
+}
+.test:nth-child(5) {
+  background: yellow;
+}
+.test:nth-child(6) {
+  background: #66ff00;
+}
+.test:nth-child(7) {
+  background: #00ff33;
+}
+.test:nth-child(8) {
+  background: #00ffcc;
+}
+.test:nth-child(9) {
+  background: #0099ff;
+}
+.test:nth-child(10) {
+  background: blue;
+}
+
+//import other scss files
+@import "test";
+
+//extend
+.test{
+	position: absolute;
+}
+.test2 {
+    @extend .absolute;
+}
+//css
+.test, .test2, {
+  position: absolute;
+}
+
