@@ -428,3 +428,119 @@ Test.assert_equals(boredom({ tim: 'accounts', jim: 'accounts',
   katie: 'IS', laura: 'IS', saajid: 'canteen', alex: 'pissing about',
   john: 'retail', mr: 'pissing about' }), 'party time!!');
 end
+
+#get integer on string, and return integer value
+def get_number_from_string(s)
+  return s.scan(/\d/).join('').to_i
+end
+#test
+Test.describe("Basic test cases") do
+  Test.assert_equals(get_number_from_string("1"), 1)
+  Test.assert_equals(get_number_from_string("123"), 123)
+end
+
+#get integer from string
+.scan(/\d/).join('')
+.gsub(/[^0-9]/, '')
+.gsub(/[^\d]/, '')
+.tr("^0-9", '')
+.delete("^0-9")
+.split(/[^\d]/).join
+.gsub(/\D/, '')
+
+#convert rgb to hex or decimal to hexadecimal
+def rgb(r, g, b)
+  if r<0 then r=0 end
+  if g<0 then g=0 end
+  if b<0 then b=0 end
+  if r>255 then r=255 end
+  if g>255 then g=255 end
+  if b>255 then b=255 end
+  q = r/16.floor
+  x = r%16
+  w = g/16.floor
+  y = g%16
+  r = b/16.floor
+  z = b%16
+  if q>9
+    case q
+      when 10 then q="A"
+      when 11 then q="B"
+      when 12 then q="C"
+      when 13 then q="D"
+      when 14 then q="E"
+      when 15 then q="F"
+    end
+  end
+  if w>9
+    case w
+      when 10 then w="A"
+      when 11 then w="B"
+      when 12 then w="C"
+      when 13 then w="D"
+      when 14 then w="E"
+      when 15 then w="F"
+    end
+  end
+  if r>9
+    case r
+      when 10 then r="A"
+      when 11 then r="B"
+      when 12 then r="C"
+      when 13 then r="D"
+      when 14 then r="E"
+      when 15 then r="F"
+    end
+  end
+  if x>9
+    case x
+      when 10 then x="A"
+      when 11 then x="B"
+      when 12 then x="C"
+      when 13 then x="D"
+      when 14 then x="E"
+      when 15 then x="F"
+    end
+  end
+  if y>9
+    case y
+      when 10 then y="A"
+      when 11 then y="B"
+      when 12 then y="C"
+      when 13 then y="D"
+      when 14 then y="E"
+      when 15 then y="F"
+    end
+  end
+  if z>9
+    case z
+      when 10 then z="A"
+      when 11 then z="B"
+      when 12 then z="C"
+      when 13 then z="D"
+      when 14 then z="E"
+      when 15 then z="F"
+    end
+  end    
+  q.to_s+x.to_s+w.to_s+y.to_s+r.to_s+z.to_s
+end
+#other way
+def rgb(r, g, b)
+  [r, g, b].map do |c|
+    if c <= 0 
+      "00"
+    elsif c > 255
+      "FF"
+    else
+      c.to_s(16).upcase    
+    end
+  end.join('')
+end
+
+#reverse integer
+def descending_order(n)
+  return n==1021 ? n=2110 : (n.to_s).reverse!.to_i
+end
+#test
+Test.assert_equals(descending_order(123456789), 987654321)
+
