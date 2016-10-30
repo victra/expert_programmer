@@ -26,7 +26,8 @@ echo $variabel;
 //===> mix variabel and string
 echo "test ".$variabel." test2";
 
-//===> array(see whatis)
+//===> all about array
+
 
 //===> show array element
 $array1 = array('a', 'b', 'c', 'd');
@@ -108,9 +109,7 @@ print $lowercase;
 
 output:
 ark
-
 DARK KING
-
 dark king
 
 //===> find position
@@ -127,7 +126,6 @@ $round = round(M_PI, 3);
 print $round;
 output:
 3
-
 3.142
 
 //===> rand(random number between)
@@ -137,7 +135,6 @@ $name = "Dark King";
 echo $name[rand(0, strlen($name)-1)];
 output:
 4
-
 n
 
 //===> array push
@@ -160,7 +157,6 @@ rsort($the_array);
 print join("::", $the_array);
 output:
 asd,dsa,qwerq,sdas
-
 sdas::qwerq::dsa::asd
 
 //===> length string
