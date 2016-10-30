@@ -308,6 +308,4 @@ King::proclaim()
 output:
 A kingly proclamation!
 
-//===> 
-
 ?>

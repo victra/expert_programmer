@@ -544,3 +544,132 @@ end
 #test
 Test.assert_equals(descending_order(123456789), 987654321)
 
+#integer to float
+def average(array)
+  x=0
+  array.each{|s|x+=s}
+  (x.to_f/array.length).round
+end
+#other way
+def average(array)
+  array.inject(:+).fdiv(array.length).round
+end
+#test
+Test.describe("Basic tests") do
+Test.assert_equals(average([1, 1, 1, 1, 9999]), 2001)
+Test.assert_equals(average([5, 78, 52, 900, 1]), 207)
+Test.assert_equals(average([5, 25, 50, 75]), 39)
+Test.assert_equals(average([2]), 2)
+Test.assert_equals(average([0]), 0)
+end
+
+#char to ascii, and sum every number in integer
+def calc(s)
+  x=[]
+  s.each_byte do |c|
+      x << c
+  end
+  q = x.join("")
+  w = q.gsub(/7/, "1")
+  z = (q.to_i-w.to_i)
+  z.to_s.scan(/6/).inject(0){|sum,x| sum + x.to_i }
+end
+
+#test
+describe "Basic tests" do
+Test.assert_equals(calc('aaaaaddddr'), 30)
+end
+
+#chmod
+def chmod_calculator(perm)
+  z=[]
+  if perm.include? :user
+    if perm[:user] == 'rwx' then z << 7
+    elsif perm[:user] == 'rw-' then z << 6
+    elsif perm[:user] == 'r--' then z << 4
+    elsif perm[:user] == 'r-x' then z << 5
+    elsif perm[:user] == '--x' then z << 1
+    elsif perm[:user] == '-w-' then z << 2
+    elsif perm[:user] == '-wx' then z << 3
+    else z << 0 end
+  else z << 0 end
+  if perm.include? :group
+    if perm[:group] == 'rwx' then z << 7
+    elsif perm[:group] == 'rw-' then z << 6
+    elsif perm[:group] == 'r--' then z << 4
+    elsif perm[:group] == 'r-x' then z << 5
+    elsif perm[:group] == '--x' then z << 1
+    elsif perm[:group] == '-w-' then z << 2
+    elsif perm[:group] == '-wx' then z << 3
+    else z << 0 end
+  else z << 0 end
+  if perm.include? :other
+    if perm[:other] == 'rwx' then z << 7
+    elsif perm[:other] == 'rw-' then z << 6
+    elsif perm[:other] == 'r--' then z << 4
+    elsif perm[:other] == 'r-x' then z << 5
+    elsif perm[:other] == '--x' then z << 1
+    elsif perm[:other] == '-w-' then z << 2
+    elsif perm[:other] == '-wx' then z << 3
+    else z << 0 end
+  else z << 0 end
+  z.join("").to_s
+end
+#other way
+KEYS = { 'r' => 4, 'w' => 2, 'x' => 1, '-' => 0 }
+def chmod_calculator(perm)
+  [
+    chmod(perm[:user]),
+    chmod(perm[:group]),
+    chmod(perm[:other])
+  ].join
+end
+def chmod(perm)
+  return 0 if perm.nil?
+  perm.chars.inject(0) { |sum, c| sum += KEYS[c] }
+end
+#test
+Test.describe "Basic test" do
+  Test.assert_equals(chmod_calculator({user: 'rwx', group: 'r-x', other: 'r-x'}),"755")
+  Test.assert_equals(chmod_calculator({user: 'rwx', group: 'r--', other: 'r--'}),"744")
+  Test.assert_equals(chmod_calculator({user: 'r-x', group: 'r-x', other: 'r-x'}),"555")
+  Test.assert_equals(chmod_calculator({group: 'rwx'}),"070")
+end
+
+https://www.codewars.com/kata/find-grid-position/train/php
+#find grid
+function create_grid($m, $n, $position)
+{
+  $a = array();
+  for ($i=0;$i<$m;$i++) {
+    $isi = '';
+    for ($j=0;$j<$n;$j++) {
+      if ($i==$position['y']){
+        if ($j==$position['x']){
+          $isi = $isi.'*';
+        } else {
+          $isi = $isi.'1';
+        }
+      } else {
+        if ($j==$position['x']){
+          $isi = $isi.'1';
+        } else {
+          $isi = $isi.'0';
+        }
+      }
+    }
+    $a[$i] = $isi;
+  }
+  return implode('\n', $a);
+}
+#test
+class MyTestCases extends TestCase
+{
+    public function testStaticOperations()
+    {
+      $this->assertEquals(create_grid(1, 1, ["x" => 0, "y" => 0]), '*');
+      $this->assertEquals(create_grid(1, 5, ["x" => 0, "y" => 0]), '*1111');
+      $this->assertEquals(create_grid(4, 8, ["x" => 7, "y" => 3]), '00000001\n00000001\n00000001\n1111111*');
+    }
+}
+
