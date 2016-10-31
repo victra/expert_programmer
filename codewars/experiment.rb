@@ -673,3 +673,17 @@ class MyTestCases extends TestCase
     }
 }
 
+alert server error
+https://www.codewars.com/kata/sum-of-positive/train/ruby
+#sum positive number in array
+def positive_sum(arr)
+  arr.inject(0){|sum,x| x>0 ? sum+x : sum+0}
+end
+#test
+describe "positive_sum" do
+  it "works for some examples" do
+    Test.assert_equals positive_sum([1,2,3,4,5]), 15
+    Test.assert_equals positive_sum([1,-2,3,4,5]), 13
+    Test.assert_equals positive_sum([-1,2,3,4,-5]), 9
+  end
+end

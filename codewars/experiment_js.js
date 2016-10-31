@@ -106,4 +106,97 @@ describe("Solution", function(){
   });
 });
 
-//
+//biner ti integer
+const binaryArrayToNumber = arr => {
+  var sum = 0;
+  if (arr[0]==1){
+    sum+=8;
+  }
+  if(arr[1]==1){
+    sum+=4;
+  }
+  if(arr[2]==1){
+    sum+=2;
+  }
+  if(arr[3]==1){
+    sum+=1;
+  }
+  return sum;
+};
+//other way(parseInt)
+const binaryArrayToNumber = arr => {
+  return parseInt(Number(arr.join('')), 2)
+};
+//other way(reduce)
+const binaryArrayToNumber = arr => {
+  return arr.reduce((a,b)=>(a<<1|b),0);
+};
+//test
+describe("One's and Zero's", () => {
+  it("Example tests", () => {
+      Test.assertEquals(binaryArrayToNumber([0,0,0,1]), 1);
+      Test.assertEquals(binaryArrayToNumber([0,0,1,0]), 2);
+      Test.assertEquals(binaryArrayToNumber([1,1,1,1]), 15);
+      Test.assertEquals(binaryArrayToNumber([0,1,1,0]), 6);
+  });
+});
+
+//convert number to word
+function switchItUp(number){
+  var arr = ['Zero','One','Two','Three','Four', 'Five','Six','Seven','Eight','Nine'];
+  return arr[number];
+}
+//other way
+function switchItUp(n){
+  return ["Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine"][n]
+}
+//test
+Test.assertEquals(switchItUp(3),"Three");
+
+alert server error
+https://www.codewars.com/kata/get-the-mean-of-an-array/train/javascript
+//average with floor result
+function getAverage(marks){
+  var sum = 0;
+  for(var i=0;i<marks.length;i++){
+    sum = sum+marks[i];
+  }
+  return Math.floor(sum/marks.length);
+}
+//test
+Test.assertEquals(getAverage([1,1,1,1,1,1,1,2]),1);
+
+//date
+function ageInDays(year, month, day){
+  var dateNow = new Date();
+  var oneDay = 24*60*60*1000;
+  var firstDate = new Date(year,month,day);
+  var secondDate = new Date(dateNow.getFullYear(),dateNow.getMonth()+1,dateNow.getDate()-1);
+  var sum = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+  if(sum<2){
+    sum=2
+  }
+  return 'You are ' + sum + ' days old';
+}
+//other way
+function ageInDays(year, month, day){
+  var today = new Date();
+  var bday = new Date(year, month-1, day);
+  var days = (today-bday)/86400000;
+  return "You are " + Math.floor(days) + " days old";
+}
+
+//find string on array
+function findNeedle(haystack) {
+  for(var i=0;i<haystack.length;i++){
+    if(haystack[i]=='needle'){return 'found the needle at position '+i}
+  }
+}
+//test
+var haystack_1 = ['3', '123124234', undefined, 'needle', 'world', 'hay', 2, '3', true, false];
+var haystack_2 = ['283497238987234', 'a dog', 'a cat', 'some random junk', 'a piece of hay', 'needle', 'something somebody lost a while ago'];
+var haystack_3 = [1,2,3,4,5,6,7,8,8,7,5,4,3,4,5,6,67,5,5,3,3,4,2,34,234,23,4,234,324,324,'needle',1,2,3,4,5,5,6,5,4,32,3,45,54];
+Test.assertEquals(findNeedle(haystack_1), 'found the needle at position 3')
+Test.assertEquals(findNeedle(haystack_2), 'found the needle at position 5') 
+Test.assertEquals(findNeedle(haystack_3), 'found the needle at position 30')
+
