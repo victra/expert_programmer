@@ -200,3 +200,53 @@ Test.assertEquals(findNeedle(haystack_1), 'found the needle at position 3')
 Test.assertEquals(findNeedle(haystack_2), 'found the needle at position 5') 
 Test.assertEquals(findNeedle(haystack_3), 'found the needle at position 30')
 
+//reverse string
+function solution(str){
+  return str.split('').reverse().join('');
+}
+//test
+Test.expect(solution('world') == 'dlrow')
+
+//sort number with null value
+function solution(nums){
+  return nums ? nums.sort(function(a, b){return a-b}) : [];
+}
+//test
+describe("Solution", function(){
+  it("should test for something", function(){
+    Test.expect(solution([1, 2, 10, 50, 5]) == [1,2,5,10,50])
+  });
+});
+
+//add zero on first element number
+function solution(value){
+  if(value>9 && value<100){
+    return "Value is 000"+value;
+  } else if(value>99 && value<1000){
+    return "Value is 00"+value;
+  } else if(value>999 && value<10000){
+    return "Value is 0"+value;
+  } else if(value>9999 && value<100000){
+    return "Value is 0"+value;
+  } else {
+    return "Value is 0000"+value;
+  }
+}
+//use slice
+function solution(value){
+  return "Value is " + ("00000" + value).slice(-5);
+}
+//test
+Test.assertEquals(solution(5),"Value is 00005")
+
+//get char on string with length
+function solution(string,limit){
+    return string.length<=limit ? string : string.slice(0, limit)+'...'
+}
+//test
+describe("Solution", function(){
+  it("should test for something", function(){
+    Test.assertEquals(solution('Testing String',8), "Testing ...", "This is just an example of how you can write your own TDD tests");
+  });
+});
+

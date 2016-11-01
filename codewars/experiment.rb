@@ -687,3 +687,97 @@ describe "positive_sum" do
     Test.assert_equals positive_sum([-1,2,3,4,-5]), 9
   end
 end
+
+#sort and pick biggest array
+def two_oldest_ages(ages)
+  ages.sort!
+  s = [ages[-1], ages[-2]].sort
+end
+#other way
+def two_oldest_ages(ages)
+  ages.max(2).sort
+end
+#other way
+def two_oldest_ages(ages)
+  ages.sort[-2, 2]
+end
+#test
+describe "Solution" do
+  it "should test for something" do
+    Test.assert_equals(two_oldest_ages([1, 3, 10, 0]), [3, 10] , "This is just an example of how you can write your own TDD tests")
+  end
+end
+
+#symbol and array
+def keysAndValues(data)
+  a = []
+  b = []
+  data.each{|x,y|a<<x}
+  data.each{|x,y|b<<y}
+  [a, b]
+end
+#other way
+def keysAndValues(data)
+  [data.keys, data.values]
+end
+#test
+describe "Solution" do
+  it "should test for something" do
+    Test.assert_equals(keysAndValues({a: 1, b: 2, c: 3}), [[:a, :b, :c], [1, 2, 3]], "This is just an example of how you can write your own TDD tests")
+  end
+end
+
+# symbol to string
+def solution(pairs)
+  a = []
+  pairs.each{|x,y|a << "#{x} = #{y}"}
+  a.join(",")
+end
+#other way
+def solution(pairs)
+  pairs.map { |key,value| "#{key} = #{value}" }.join(",")
+end
+#test
+describe "Solution" do
+  it "should test for something" do
+    Test.assert_equals(solution({a: 1, b: '2'}), "a = 1,b = 2", "This is just an example of how you can write your own TDD tests")
+  end
+end
+
+# get last char in srting with length
+def solution(str, ending)
+  str[-(ending.length), ending.length] == ending ? true : false 
+end
+# other way
+def solution(str, ending)
+  str.end_with?(ending)
+end
+#test
+describe "Solution" do
+  it "should test for something" do
+    Test.assert_equals(solution('sumo', 'omo'), false, "This is just an example of how you can write your own TDD tests")
+  end
+end
+
+#sorting array
+def sortme( names )
+  names.sort
+end
+# test
+describe "Solution" do
+  it "should test for something" do
+    Test.assert_equals(sortme(['d', 's', 'a']), ['a', 'd', 's'], "This is just an example of how you can write your own TDD tests")
+  end
+end
+
+#sorting string
+def sortme( names )
+  names.chars.sort.join
+end
+# test
+describe "Solution" do
+  it "should test for something" do
+    Test.assert_equals(sortme('dsa'), 'ads', "This is just an example of how you can write your own TDD tests")
+  end
+end
+
