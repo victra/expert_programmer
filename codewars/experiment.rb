@@ -781,3 +781,120 @@ describe "Solution" do
   end
 end
 
+#string to array, delete char oin string and remove space
+def bang_bang(history)
+  a = history.split("\n")
+  (a[-1][5...a[-1].length]).strip
+end
+#other way
+def bang_bang(history)
+  history.scan(/ {2,}\d+ {2}(.+)/).last[0]
+end
+#test
+history=
+"   1  cd /pub
+  2  more beer
+  3  lost
+  4  ls 
+  5  touch me 
+  6  chmod 000 me 
+  7  history
+  8  more me"  
+  Test.assert_equals(bang_bang(history), "more me")
+end
+
+#number to word
+def number_to_ordinal(number)
+  if number>103 && number<121 then return number.to_s+'th' end
+  if number==500 then return number.to_s+'th' end
+  if number>20 then s = number.to_s[-1].to_i else s = number end
+
+  if s==0 then return '0'
+  elsif s==1 then return number.to_s+'st'
+  elsif s==2 then return number.to_s+'nd'
+  elsif s==3 then return number.to_s+'rd'
+  elsif s>3 && s<21 then return number.to_s+'th' end
+end
+#other way
+def number_to_ordinal(number)
+  number = number.to_s
+  case
+    when number == '0' then number
+    when number[-2] == '1' then "#{number}th"
+    when number[-1] == '1' then "#{number}st"
+    when number[-1] == '2' then "#{number}nd"
+    when number[-1] == '3' then "#{number}rd"
+    else "#{number}th"
+  end
+end
+#test
+Test.assert_equals(number_to_ordinal(1), '1st')
+Test.assert_equals(number_to_ordinal(2), '2nd')
+Test.assert_equals(number_to_ordinal(3), '3rd')
+Test.assert_equals(number_to_ordinal(4), '4th')
+
+#count every char on string
+def diamonds_and_toads(sentence, fairy) 
+  if fairy==:good
+    sumR = sentence.scan("R").count
+    sumr = sentence.scan("r").count + sumR*2
+    sumC = sentence.scan("C").count
+    sumc = sentence.scan("c").count + sumC*2
+    if sumr==0 && sumc==0 then return {} elsif sumr==0 && sumc!=0 then return {:crystal=>sumc} elsif sumr!=0 && sumc==0 then return {:ruby=>sumr} end 
+    {:ruby=>sumr,:crystal=>sumc} 
+  else
+    sumP = sentence.scan("P").count
+    sump = sentence.scan("p").count + sumP*2
+    sumS = sentence.scan("S").count
+    sums = sentence.scan("s").count + sumS*2
+    if sump==0 && sums==0 then return {} elsif sump==0 && sums!=0 then return {:squirrel=>sums} elsif sump!=0 && sums==0 then return {:python=>sump} end
+    {:python=>sump,:squirrel=>sums} 
+  end
+end
+#other way
+def diamonds_and_toads(s, fairy) 
+  ans = {}
+  case fairy
+  when :good
+    ans = {ruby: (s.count("R") * 2 + s.count("r")), crystal: (s.count("C") * 2 + s.count("c"))}
+    ans.delete_if{|key, value| value <= 0}
+    ans
+  when :evil
+    ans = {python: (s.count("P") * 2 + s.count("p")), squirrel: (s.count("S") * 2 + s.count("s"))}
+    ans.delete_if{|key, value| value <= 0}
+    ans
+  end
+end
+#test
+describe "Basic test" do
+  Test.assert_equals(diamonds_and_toads("Ruby and Crystal", :good), {ruby: 3, crystal: 2 })
+  Test.assert_equals(diamonds_and_toads("This string contain some Ruby and some Crystal in it", :good), {ruby: 4, crystal: 3 })
+  Test.assert_equals(diamonds_and_toads("Python and Squirrel", :evil), {python: 2, squirrel: 2})
+  Test.assert_equals(diamonds_and_toads("This string contain some Python and some Squirrel in it", :evil), {python: 2, squirrel: 6 })
+end
+
+#delete number in string and split
+def kebabize(str)
+  a = str.gsub(/\d\s?/, "")
+  b = a.split /(?=[A-Z])/
+  b.join("-").downcase
+end
+#other way
+def kebabize(str)
+  puts str
+  str.gsub(/([0-9])/, '').split(/(?=[A-Z])/).join('-').downcase
+end
+#test
+Test.assert_equals(kebabize('myCamelCasedString'), 'my-camel-cased-string');
+Test.assert_equals(kebabize('myCamelHas3Humps'), 'my-camel-has-humps');
+
+#get only duplicate number
+def find_dup(arr)
+  arr.detect{ |e| arr.count(e) > 1 }
+end
+#test
+Test.assert_equals(find_dup([1,1,2,3]), 1)
+Test.assert_equals(find_dup([1,2,2,3]), 2)
+Test.assert_equals(find_dup([5,4,3,2,1,1]), 1)
+Test.assert_equals(find_dup([1,3,2,5,4,5,7,6]), 5)
+Test.assert_equals(find_dup([8,2,6,3,7,2,5,1,4]), 2)
