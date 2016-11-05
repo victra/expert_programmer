@@ -151,3 +151,287 @@ var greatestDivEver = React.createElement(
   "i am div"
 );
 
+//create class react
+var React = require('react');
+var ReactDOM = require('react-dom');
+
+var MyComponentClass = React.createClass({
+  render: function () {
+    return <h1>Hello world</h1>;
+  }
+});
+
+ReactDOM.render(
+  <MyComponentClass />, 
+  document.getElementById('app')
+);
+
+//show variable in class react
+var React = require('react');
+var ReactDOM = require('react-dom');
+
+
+var friends = [
+  {
+    title: "Yummmmmmm",
+    src: "https://s3.amazonaws.com/codecademy-content/courses/React/react_photo-monkeyweirdo.jpg"
+  },
+  {
+    title: "Hey Guys!  Wait Up!",
+    src: "https://s3.amazonaws.com/codecademy-content/courses/React/react_photo-earnestfrog.jpg"
+  },
+  {
+    title: "Yikes",
+    src: "https://s3.amazonaws.com/codecademy-content/courses/React/react_photo-alpaca.jpg"
+  }
+];
+
+// New component class starts here:
+var Friend = React.createClass({
+  render: function(){
+    var friend = friends[0];
+    return(
+      <div>
+        <h1>
+          {friend.title}
+        </h1>
+        <img src={friend.src}/>
+      </div>
+    )
+  }
+});
+
+ReactDOM.render(
+  <Friend/>,
+  document.getElementById('app')
+);
+
+//react class with attribut
+var React = require('react');
+var ReactDOM = require('react-dom');
+
+var MyName = React.createClass({
+  // name property goes here:
+  name: 'Dark King',
+  render: function () {
+    return <h1>My name is {this.name}</h1>;
+  }
+});
+
+ReactDOM.render(<MyName />, document.getElementById('app'));
+
+//show function in react class
+var React = require('react');
+var ReactDOM = require('react-dom');
+
+var Button = React.createClass({
+  scream: function () {
+    alert('AAAAAAAAHHH!!!!!');
+  },
+
+  render: function () {
+    return <button onClick={this.scream}>AAAAAH!</button>;
+  }
+});
+
+ReactDOM.render(
+  <Button/>,
+  document.getElementById('app')
+);
+
+//call or import js page in js page
+//this is Navbar page page
+var React = require('react');
+
+var NavBar = React.createClass({
+  render: function () {
+    var pages = ['home', 'blog', 'pics', 'bio', 'art', 'shop', 'about', 'contact'];
+    var navLinks = pages.map(function(page){
+      return (
+        <a href={'/' + page}>
+          {page}
+        </a>
+      );
+    });
+
+    return <nav>{navLinks}</nav>;
+  }
+});
+
+module.exports = NavBar;
+//this is profile page
+var React = require('react');
+var ReactDOM = require('react-dom');
+var NavBar = require('./NavBar.js');
+
+var ProfilePage = React.createClass({
+  render: function () {
+    return (
+      <div>
+        <NavBar />
+        <h1>All About Me!</h1>
+        <p>I like movies and blah blah blah blah blah</p>
+        <img src="https://s3.amazonaws.com/codecademy-content/courses/React/react_photo-monkeyselfie.jpg" />
+      </div>
+    );
+  }
+});
+
+ReactDOM.render(
+  <ProfilePage/>,
+  document.getElementById('app')
+);
+
+//use attribut in render
+var React = require('react');
+var ReactDOM = require('react-dom');
+
+var PropsDisplayer = React.createClass({
+  render: function () {
+    var stringProps = JSON.stringify(this.props);
+
+    return (
+      <div>
+        <h1>CHECK OUT MY PROPS OBJECT</h1>
+        <h2>{stringProps}</h2>
+      </div>
+    );
+  }
+});
+
+ReactDOM.render(
+  <PropsDisplayer myProp="Hello"/>,
+  document.getElementById('app')
+);
+
+//use attribut in render
+var React = require('react');
+var ReactDOM = require('react-dom');
+
+var Greeting = React.createClass({
+  render: function () {
+    return <h1>Hi there, {this.props.firstName}!</h1>;
+  }
+});
+
+ReactDOM.render(
+  <Greeting firstName='Dark King' />, 
+  document.getElementById('app')
+);
+
+output:
+Hi there, Dark King!
+
+//import page react
+//greeting page
+var React = require('react');
+
+var Greeting = React.createClass({
+  render: function () {
+    return <h1>Hi there, {this.props.name}!</h1>;
+  }
+});
+
+module.exports = Greeting;
+//app page
+var React = require('react');
+var ReactDOM = require('react-dom');
+var Greeting = require('./Greeting');
+
+var App = React.createClass({
+  render: function () {
+    return (
+      <div>
+        <h1>
+          Hullo and, "Welcome to The Newzz," "On Line!"
+        </h1>
+        <Greeting name="Dark King"/>
+        <article>
+          Latest newzz:  where is my phone?
+        </article>
+      </div>
+    );
+  }
+});
+
+ReactDOM.render(
+  <App />, 
+  document.getElementById('app')
+);
+
+//function method in react class
+var React = require('react');
+var ReactDOM = require('react-dom');
+
+var App = React.createClass({
+  getInitialState: function () {
+    return {title: 'Best App'};
+  },
+  
+  render: function () {
+    return (
+      <h1>
+        Wow this entire app is just an h1.
+      </h1>
+    );
+  }
+});
+
+//call initial state in render
+var React = require('react');
+var ReactDOM = require('react-dom');
+
+var App = React.createClass({
+  getInitialState: function () {
+    return {title: 'Best App'};
+  },
+  
+  render: function () {
+    return (
+      <h1>
+        {this.state.title}
+      </h1>
+    );
+  }
+});
+
+ReactDOM.render(
+  <App/>,
+  document.getElementById('app')
+);
+
+//toggle button in react class
+var React = require('react');
+var ReactDOM = require('react-dom');
+
+var green = '#39D1B4';
+var yellow = '#FFD712';
+
+var Toggle = React.createClass({
+  getInitialState: function() {
+    return {color: green}
+  },
+  changeColor: function() {
+    var newMood = this.state.color == green ? yellow : green;
+    this.setState({ color: newMood });
+  },
+  render: function () {
+    return (
+      <div style={{background: this.state.color}}>
+        <h1>
+          Change my color
+          <button onClick={this.changeColor}>
+            Change color
+          </button>
+        </h1>
+      </div>
+    );
+  }
+});
+
+ReactDOM.render(
+  <Toggle/>,
+  document.getElementById('app')
+);
+
+//

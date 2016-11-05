@@ -250,3 +250,71 @@ describe("Solution", function(){
   });
 });
 
+//integer to string
+function feuerFrei(concentration, barrels) {
+  if(concentration*barrels < 100){
+    return (100-concentration*barrels).toString()+' Stunden mehr Benzin benötigt.';
+  } else if (concentration*barrels == 100){
+    return 'Perfekt!';
+  } else {
+    return concentration*barrels - 100;
+  }
+}
+//test
+Test.describe("feuerFrei", _ => {
+  Test.it("should work for fixed tests", _ => {
+    Test.assertEquals(feuerFrei(5,20), "Perfekt!");
+    Test.assertEquals(feuerFrei(5,200), 900);
+    Test.assertEquals(feuerFrei(3,20), '40 Stunden mehr Benzin benötigt.');
+  });
+});
+
+//write methode code js other way
+String.prototype.ipv4Address=function(){
+  return this;
+}
+//test
+Test.describe("Basic tests",_=>{
+  Test.assertEquals("".ipv4Address(), false);
+});
+
+//check if array contain number or string
+String.prototype.ipv4Address=function(){
+  var a = this.split(".");
+  var h;
+  if(a.length<4||a.length>4){return false}
+  for(var i=0;i<a.length;i++){
+    if(parseInt(a[i])>255){return false}
+    if(a[i].length>1&&a[i][0]==0){return false}
+    if (typeof parseInt(a[i])==='number' && (parseInt(a[i])%1)===0) {
+        for(var j=0;j<a[i].length;j++){
+          if(typeof parseInt(a[i][j])==='number' && (parseInt(a[i][j])%1)===0){
+            h = true;
+          } else {
+            return false;
+          }
+        }
+    } else {
+        return false;
+    }
+  }
+  return h;
+}
+//test
+Test.describe("Basic tests",_=>{
+  Test.assertEquals("".ipv4Address(), false);
+  Test.assertEquals("127.0.0.1".ipv4Address(), true);
+  Test.assertEquals("0.0.0.0".ipv4Address(), true);
+  Test.assertEquals("255.255.255.255".ipv4Address(), true);
+  Test.assertEquals("10.20.30.40".ipv4Address(), true);
+  Test.assertEquals("10.256.30.40".ipv4Address(), false);
+  Test.assertEquals("10.20.030.40".ipv4Address(), false);
+  Test.assertEquals("127.0.1".ipv4Address(), false);
+  Test.assertEquals("127.0.0.0.1".ipv4Address(), false);
+  Test.assertEquals("..255.255".ipv4Address(), false);
+  Test.assertEquals("127.0.0.1\n".ipv4Address(), false);
+  Test.assertEquals("\n127.0.0.1".ipv4Address(), false);
+  Test.assertEquals(" 127.0.0.1".ipv4Address(), false);
+  Test.assertEquals("127.0.0.1 ".ipv4Address(), false);
+  Test.assertEquals(" 127.0.0.1 ".ipv4Address(), false);
+})
