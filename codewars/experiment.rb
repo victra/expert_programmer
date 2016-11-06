@@ -781,7 +781,7 @@ describe "Solution" do
   end
 end
 
-#string to array, delete char oin string and remove space
+#string to array, delete char in string and remove space
 def bang_bang(history)
   a = history.split("\n")
   (a[-1][5...a[-1].length]).strip
