@@ -95,3 +95,24 @@ For arr = [7, 2, 2, 5, 10, 7], the output should be
 isSmooth(arr) = true.
 The first and the last elements of arr are equal to 7, and its middle also equals 2 + 5 = 7. Thus, the array is smooth and the output is true.
 
+# error time limit
+https://codefights.com/arcade/code-arcade/loop-tunnel/hBw5BJiZ4LmXcy92u
+# while
+def countSumOfTwoRepresentations2(n, l, r)
+    count = 0
+    a = l
+    while a>=l && a<=r do 
+        b = a
+        while b>=l && b<=r do
+            if a+b==n then count+=1 end
+            b+=1
+        end
+        a+=1
+    end
+    count
+end 
+# task
+For n = 6, l = 2 and r = 4, the output should be
+countSumOfTwoRepresentations2(n, l, r) = 2.
+There are just two ways to write 6 as A + B, where 2 ≤ A ≤ B ≤ 4: 6 = 2 + 4 and 6 = 3 + 3.
+

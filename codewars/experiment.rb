@@ -898,3 +898,38 @@ Test.assert_equals(find_dup([1,2,2,3]), 2)
 Test.assert_equals(find_dup([5,4,3,2,1,1]), 1)
 Test.assert_equals(find_dup([1,3,2,5,4,5,7,6]), 5)
 Test.assert_equals(find_dup([8,2,6,3,7,2,5,1,4]), 2)
+
+#number to binary and sum element
+def count_bits(n)
+  n.to_s(2).split("").inject(0){|sum,x|sum+=x.to_i}
+end
+
+#fail hidden test
+https://www.codewars.com/kata/split-strings/train/ruby
+#split string to 2 char
+def solution(str)
+  str.scan(/.{1,2}/)
+end
+#test
+describe "Solution" do
+  it "should test for something" do
+    Test.assert_equals(['ab', 'cd', 'ef'], solution('abcdef'), "This is just an example of how you can write your own TDD tests")
+  end
+end
+
+#remove all space and get pair char, if just have single char add '_'
+def solution(str)
+  c = str.gsub(/\s+/, "")
+  c.scan(/.{1,2}/).map{|x|if x.length < 2 then x=x+'_' else x end}
+end
+#other way
+def solution str
+  (str + '_').scan /../
+end
+#test
+describe "Solution" do
+  it "should test for something" do
+    Test.assert_equals(['ab', 'cd', 'e_'], solution('ab cde '), "This is just an example of how you can write your own TDD tests")
+  end
+end
+
