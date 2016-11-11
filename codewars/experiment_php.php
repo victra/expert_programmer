@@ -231,4 +231,40 @@ class MaxMinTest extends TestCase {
   }
 }
 
+//string to array, ucfirst(huruf awal besar)
+function toJadenCase($string) 
+{
+  $words = explode(" ",$string);
+  for($i=0;$i<count($words);$i++){
+    $words[$i] = ucfirst($words[$i]);  
+  }
+  return join(" ", $words);
+}
+//other way
+function toJadenCase($string) 
+{
+   return ucwords($string);
+}
+//test
+class JadenTestCases extends TestCase
+{
+    public function testJadenCase() {
+       $str = "How can mirrors be real if our eyes aren't real";
+       $this->assertEquals(toJadenCase($str), "How Can Mirrors Be Real If Our Eyes Aren't Real");
+    }
+}
+
+//sum of string
+function sum_strings($a, $b) {
+  return $a+$b;
+}
+// test
+class SumStringsTest extends TestCase {
+  public function testExamples() {
+    $this->assertEquals('579', sum_strings('123', '456'));
+  }
+}
+
+
+
 ?>
