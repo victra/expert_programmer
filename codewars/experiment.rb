@@ -933,3 +933,50 @@ describe "Solution" do
   end
 end
 
+#split and get position array
+def domain_name(url)
+  a = url.split(".")
+  if a.length>2 then 
+    a[1] 
+  else 
+    z = a[0].split("//")
+    z[1]
+  end
+end
+#other way
+def domain_name(url)
+  URI.parse(url).host.split('.').last(2)[0]
+end
+#test
+describe "Solution" do
+  it "should test for something" do
+    Test.assert_equals(domain_name("http://github.com/carbonfive/raygun"), "github", "This is just an example of how you can write your own TDD tests")
+  end
+end
+
+#get mean in array/ sum all element array
+def calc_mean(ary)
+  if !ary.is_a?(Array)
+    0
+  elsif ary.empty?
+    0
+  else
+    ary.inject(0){|sum,x|sum+=x}/ary.length
+  end
+end
+#other way
+def calc_mean(ary)
+  if !ary.is_a?(Array)
+    0
+  elsif ary.empty?
+    0
+  else
+    ary.inject(:+) / Float(ary.length)  
+  end
+end
+#test
+describe "Solution" do
+  it "should test for something" do
+    Test.assert_equals(calc_mean([15, 30, 60, 120, 240]), 93.0, "This is just an example of how you can write your own TDD tests")
+  end
+end
