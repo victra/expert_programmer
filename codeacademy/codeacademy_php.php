@@ -10,8 +10,8 @@
 
 //===> comment multi line
 /*  
-	content comment
-	content comment
+  content comment
+  content comment
 */
 
 //===> show string
@@ -26,8 +26,7 @@ echo $variabel;
 //===> mix variabel and string
 echo "test ".$variabel." test2";
 
-//===> all about array
-
+//===> array(see whatis)
 
 //===> show array element
 $array1 = array('a', 'b', 'c', 'd');
@@ -56,8 +55,8 @@ Im learning PHP!
 //===> while
 $loopCond = true;
 while ($loopCond){
-	echo "<p>The loop is running.<p>";
-	$loopCond = false;
+  echo "<p>The loop is running.<p>";
+  $loopCond = false;
 }
 output:
 The loop is running.
@@ -81,7 +80,7 @@ output:
 //===> do while
 $loopCond = false;
 do {
-	echo "<p>The loop ran even though the loop condition is false.</p>";
+  echo "<p>The loop ran even though the loop condition is false.</p>";
 } while ($loopCond);
 output:
 The loop ran even though the loop condition is false.
@@ -109,7 +108,9 @@ print $lowercase;
 
 output:
 ark
+
 DARK KING
+
 dark king
 
 //===> find position
@@ -126,6 +127,7 @@ $round = round(M_PI, 3);
 print $round;
 output:
 3
+
 3.142
 
 //===> rand(random number between)
@@ -135,6 +137,7 @@ $name = "Dark King";
 echo $name[rand(0, strlen($name)-1)];
 output:
 4
+
 n
 
 //===> array push
@@ -157,6 +160,7 @@ rsort($the_array);
 print join("::", $the_array);
 output:
 asd,dsa,qwerq,sdas
+
 sdas::qwerq::dsa::asd
 
 //===> length string
@@ -303,5 +307,7 @@ class King {
 King::proclaim()
 output:
 A kingly proclamation!
+
+//===> 
 
 ?>
