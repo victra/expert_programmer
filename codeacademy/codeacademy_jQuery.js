@@ -195,3 +195,71 @@ $(document).ready(function() {
 	});
 });
 
+// animate go down
+$(document).ready(function(){
+    $('img').animate({top:'+=100px'},1000);
+});
+
+// animate div
+$(document).ready(function(){
+    $('div').click(function(){
+        $(this).effect('explode');   
+    }); 
+});
+$(document).ready(function(){
+    $('div').click(function(){
+        $(this).effect('bounce', {times:3}, 500);   
+    }); 
+});
+$(document).ready(function(){
+    $('div').click(function(){
+        $(this).effect('slide');   
+    }); 
+});
+
+//dropdown
+$(document).ready(function() {
+    $("#menu").accordion({collapsible: true, active: false});
+});
+
+//draggable content
+$(document).ready(function(){
+    $('#car').draggable();    
+});
+
+//resizable content
+$(document).ready(function(){
+   $('div').resizable(); 
+});
+
+//selectable content
+$(document).ready(function(){
+   $('ol').selectable(); 
+});
+
+//sortable content
+$(document).ready(function(){
+   $('ol').sortable(); 
+});
+
+//dropdown menu
+$(document).ready(function(){
+    $('#menu').accordion();
+});
+//html
+<div id="menu">
+    <h3>Section 1</h3>
+    <div>
+        <p>I'm the first section!</p>
+    </div>
+    <!--Add two more sections below!-->
+    <h3>Section 2</h3>
+    <div>
+        <p>I'm the first section!</p>
+    </div>
+    <h3>Section 3</h3>
+    <div>
+        <p>I'm the first section!</p>
+    </div>
+</div>
+
