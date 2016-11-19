@@ -980,3 +980,23 @@ describe "Solution" do
     Test.assert_equals(calc_mean([15, 30, 60, 120, 240]), 93.0, "This is just an example of how you can write your own TDD tests")
   end
 end
+
+#sort string
+def longest(a1, a2)
+  a = a1+a2
+  b = a.split("").uniq.join("")
+  b.split("").uniq.sort!.join("")
+end
+#other way
+def longest(a, b)
+  (a+b).chars.uniq.sort.join
+end
+#test
+Test.describe("longest") do
+    Test.it("Basic tests") do
+        Test.assert_equals(longest("aretheyhere", "yestheyarehere"), "aehrsty")
+        Test.assert_equals(longest("loopingisfunbutdangerous", "lessdangerousthancoding"), "abcdefghilnoprstu")
+        Test.assert_equals(longest("inmanylanguages", "theresapairoffunctions"), "acefghilmnoprstuy")
+    end 
+end
+

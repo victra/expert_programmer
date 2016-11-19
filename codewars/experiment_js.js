@@ -318,3 +318,34 @@ Test.describe("Basic tests",_=>{
   Test.assertEquals("127.0.0.1 ".ipv4Address(), false);
   Test.assertEquals(" 127.0.0.1 ".ipv4Address(), false);
 })
+
+// replace element string
+function fakeBin(x){
+  var a = x.split("");
+  for (var i=0; i<a.length;i++){
+    if (a[i]<5){a[i]='0'}
+    else {a[i]='1'}
+  }
+  return a.join("");
+}
+//other way
+return x.split('').map(n => n < 5 ? 0 : 1).join('');
+
+//find position of alfabet 
+function position(letter){
+  var a = 'abcdefghijklmnopqrstuvwxyz'.split('');
+  for(var i=0; i<a.length; i++){
+    if(letter==a[i]){return "Position of alphabet: "+(i+1)}
+  }
+}
+//other way
+function position(alphabet){
+  var letters = [" ", "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+  var placed = letters.indexOf(alphabet)
+  return "Position of alphabet:" + " " + placed; 
+}
+//test
+Test.assertEquals(position("a"),"Position of alphabet: 1");
+Test.assertEquals(position("z"),"Position of alphabet: 26");
+Test.assertEquals(position("e"),"Position of alphabet: 5");
+
