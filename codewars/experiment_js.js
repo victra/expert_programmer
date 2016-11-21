@@ -349,3 +349,30 @@ Test.assertEquals(position("a"),"Position of alphabet: 1");
 Test.assertEquals(position("z"),"Position of alphabet: 26");
 Test.assertEquals(position("e"),"Position of alphabet: 5");
 
+//return the total number of smiling faces in the array
+function countSmileys(arr) {
+  var s = 0;
+  for(var i=0;i<arr.length;i++){
+    if(arr[i]==':D' || arr[i]==';D' || arr[i]==':~D' || arr[i]==';~D' || arr[i]==':-D' || arr[i]==';-D' || arr[i]==':)' || arr[i]==';)' || arr[i]==':~)' || arr[i]==';~)' || arr[i]==':-)' || arr[i]==';-)'){
+      s+=1;
+    }
+  }
+  return s;
+}
+//other way
+function countSmileys(arr) {
+  let smiles = 0
+  arr.forEach(_ => {
+    if (/(:|;)(\-|\~)?(\)|D)/.test(_)) smiles++
+  })
+  return smiles
+}
+//test
+Test.describe("Basic testing", function() {
+  it("", _ => {
+    Test.assertEquals(countSmileys([]), 0);
+    Test.assertEquals(countSmileys([':D',':~)',';~D',':)']), 4);
+    Test.assertEquals(countSmileys([':)',':(',':D',':O',':;']), 2);
+    Test.assertEquals(countSmileys([';]', ':[', ';*', ':$', ';-D']), 1);
+  });
+});
