@@ -393,3 +393,13 @@ function getMax2()
   return {name: 'Max Headroom'};
 }
 
+// echo in js like ruby
+function sayHello( name, city, state ) {
+  var nama = name[2] ? " "+name[2] : "";
+  return "Hello, "+name[0]+" "+name[1]+nama+"! Welcome to "+city+", "+state+"!"
+}
+//other way
+function sayHello( name, city, state ) {
+  return `Hello, ${name.join(' ')}! Welcome to ${city}, ${state}!`
+}
+
