@@ -376,3 +376,20 @@ Test.describe("Basic testing", function() {
     Test.assertEquals(countSmileys([';]', ':[', ';*', ':$', ';-D']), 1);
   });
 });
+
+//integer to string
+function numberToString(num) {
+  return num.toString();
+}
+
+//other way to write hash in js
+function getMax1()
+{
+  var max = {name: 'Max Headroom'}
+  return max;
+}
+function getMax2()
+{
+  return {name: 'Max Headroom'};
+}
+
