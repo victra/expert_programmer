@@ -198,3 +198,106 @@ before_action :require_user, only: [:index, :show]
     <li><%= link_to "Signup", 'signup' %></a></li> 
   </ul> 
 <% end %>
+
+%>
+next step auth
+model user
+class User < ActiveRecord::Base
+  has_secure_password
+  def editor? 
+    self.role == 'editor' 
+  end
+end
+
+seed
+mateo = User.create(first_name: 'Mateo', last_name: 'Lazo', email: 'mateo@email.com', password: 'Mateo1', password_confirmation: 'Mateo1', role: 'editor')
+julian = User.create(first_name: 'Julian', last_name: 'Jones', email: 'julian@email.com', password: 'Julian1', password_confirmation: 'Julian1')
+freida = User.create(first_name: 'Freida', last_name: 'Gray', email: 'freida@email.com', password: 'Freida1', password_confirmation: 'Freida1', role: 'admin')
+
+check
+rails console
+mateo = User.find_by(email: 'mateo@email.com')
+mateo.editor?
+=>true
+
+add required on application_controller
+class ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception
+   helper_method :current_user
+   def current_user
+     @current_user ||= User.find(session[:user_id]) if session[:user_id]
+   end 
+   def require_user
+     redirect_to '/login' unless current_user
+   end 
+  def require_editor 
+    redirect_to '/' unless current_user.editor? 
+  end
+  def require_admin
+    redirect_to '/' unless current_user.admin?
+  end
+end
+
+add before_action on recipes_controller
+class RecipesController < ApplicationController
+
+  before_action :require_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_editor, only: [:show, :edit]
+  before_action :require_admin, only: [:destroy]
+  
+  def show
+    @recipe = Recipe.find(params[:id])
+  end
+
+  def edit
+    @recipe = Recipe.find(params[:id])
+  end
+
+  def update
+    @recipe = Recipe.find(params[:id])
+      if @recipe.update(recipe_params)
+        redirect_to @recipe
+      else
+        render 'edit'
+      end
+  end
+
+  def destroy
+    @recipe = Recipe.find(params[:id])
+    @recipe.destroy
+    redirect_to root_url
+  end 
+
+  private
+    def recipe_params
+      params.require(:recipe).permit(:name, :ingredients, :instructions)
+    end
+
+end
+
+add display on recipes/show.html
+<div class="recipe-show">
+  <div class="container">
+    <h2><%= @recipe.name %></h2>
+    <img class="arrow" src="http://s3.amazonaws.com/codecademy-content/courses/rails-auth/img/arrow.svg" width="80" height="40">
+    <div class="img_container">
+      <%= image_tag @recipe.image %>
+    </div>
+    <div class="recipe-info">
+      <p class="ingredients"><%= @recipe.ingredients %></p>
+      <p class="instructions"><%= @recipe.instructions %></p> 
+    </div> 
+    
+    <!-- Add links here -->
+      <% if current_user && current_user.editor? %> 
+        <p class="recipe-edit"> 
+          <%= link_to "Edit Recipe", edit_recipe_path(@recipe.id) %> 
+        </p> 
+      <% end %>
+    
+      <% if current_user && current_user.admin? %> 
+        <p class="recipe-delete"><%= link_to "Delete", recipe_path(@recipe), method: "delete" %><p> 
+      <% end %>
+  </div>
+</div>
+
