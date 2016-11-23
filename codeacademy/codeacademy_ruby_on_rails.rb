@@ -87,3 +87,114 @@ class CreateDestinations < ActiveRecord::Migration
   end
 end
 
+#add authentification
+1. add gem 'bcrypt', '~> 3.1.7'
+2. bundle install
+3. add migrate
+4. add signup
+routes
+get 'signup'  => 'users#new' 
+resources :users
+
+controller users
+def new
+  @user = User.new
+end
+
+def create 
+  @user = User.new(user_params) 
+  if @user.save 
+    session[:user_id] = @user.id 
+    redirect_to '/' 
+  else 
+    redirect_to '/signup' 
+  end 
+end
+
+private
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :password)
+  end
+
+erb
+<h1>Sign up</h1>
+
+<%= form_for(@user) do |f| %>
+  <%= f.text_field :first_name, :placeholder => "First name" %>
+  <%= f.text_field :last_name, :placeholder => "Last name" %>
+  <%= f.email_field :email, :placeholder => "Email" %>
+  <%= f.password_field :password, :placeholder => "Password" %>
+  <%= f.submit "Create an account", class: "btn-submit" %>
+<% end %>
+
+check console%>
+rails console
+User.all
+
+5. login
+
+routes
+get '/login' => 'sessions#new'
+post 'login' => 'sessions#create'
+
+controller session
+def new
+end
+def create
+  @user = User.find_by_email(params[:session][:email])
+  if @user && @user.authenticate(params[:session][:password])
+    session[:user_id] = @user.id
+    redirect_to '/'
+  else
+    redirect_to 'login'
+  end 
+end
+
+erb
+<h1>Log in</h1>			
+<%= form_for(:session, url: login_path) do |f| %> 
+  <%= f.email_field :email, :placeholder => "Email" %> 
+  <%= f.password_field :password, :placeholder => "Password" %> 
+  <%= f.submit "Log in", class: "btn-submit" %>
+<% end %>
+
+%>
+6.logout
+
+routes
+delete 'logout' => 'sessions#destroy'
+
+controller session
+def destroy 
+  session[:user_id] = nil 
+  redirect_to '/' 
+end
+
+7. add session
+
+controller application_controller
+helper_method :current_user 
+def current_user 
+  @current_user ||= User.find(session[:user_id]) if session[:user_id] 
+end
+def require_user 
+  redirect_to '/login' unless current_user 
+end
+
+8. test required session on some page
+
+albums_controller
+before_action :require_user, only: [:index, :show]
+
+9. add logout on layout application_controller
+<% if current_user %> 
+  <ul> 
+    <li><%= current_user.email %></li> 
+    <li><%= link_to "Log out", logout_path, method: "delete" %></li> 
+  </ul> 
+<% else %> 
+  <ul> 
+    <li><%= link_to "Login", 'login' %></a></li> 
+    <li><%= link_to "Signup", 'signup' %></a></li> 
+  </ul> 
+<% end %>
