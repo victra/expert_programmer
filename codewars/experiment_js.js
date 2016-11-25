@@ -403,3 +403,42 @@ function sayHello( name, city, state ) {
   return `Hello, ${name.join(' ')}! Welcome to ${city}, ${state}!`
 }
 
+//multiple number with condition genab ganjil
+function simpleMultiplication(num){
+    return num%2==0 ? num*8 : num*9;
+}
+//test
+Test.describe("Basic Tests", function(){
+  Test.assertEquals(simpleMultiplication(2),16,'Should return given argument times eight...')
+  Test.assertEquals(simpleMultiplication(1),9,'Should return given argument times nine...')
+  Test.assertEquals(simpleMultiplication(8),64,'Should return given argument times eight...')
+  Test.assertEquals(simpleMultiplication(4),32,'Should return given argument times eight...')
+  Test.assertEquals(simpleMultiplication(5),45,'Should return given argument times nine...')
+});
+
+//return round
+function roundToFive(numbers){
+  return numbers.map(n => Math.round(n/5)*5);
+}
+//test
+describe("Solution", function(){
+  it("should test for something", function(){
+    Test.assertEquals(roundToFive([34.5, 56.2, 11, 13]), [35, 55, 10, 15], "This is just an example of how you can write your own TDD tests");
+  });
+});
+
+//reverse array
+function reverseWords(str){
+  return str.split(" ").reverse().join(" ");
+}
+//test
+describe("reverseWords",function(){
+  it("should work for some examples", function(){
+    Test.assertEquals(reverseWords("hello world!"), "world! hello")
+    Test.assertEquals(reverseWords("yoda doesn't speak like this" ),  "this like speak doesn't yoda")
+    Test.assertEquals(reverseWords("foobar"                       ),  "foobar")
+    Test.assertEquals(reverseWords("kata editor"                  ),  "editor kata")
+    Test.assertEquals(reverseWords("row row row your boat"        ),  "boat your row row row")
+  });
+});
+
