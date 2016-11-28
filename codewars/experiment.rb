@@ -1000,3 +1000,19 @@ Test.describe("longest") do
     end 
 end
 
+#get string length
+def friend(friends)
+  a=[]
+  friends.each{|x| if x.length==4 then a<<x end}
+  return a
+end
+#other way
+def friend(friends)
+  friends.select { |name| name.length == 4 }
+end
+#test
+Test.assert_equals(friend(["Ryan", "Kieran", "Mark"]), ["Ryan", "Mark"])
+Test.assert_equals(friend(["Ryan", "Jimmy", "123", "4", "Cool Man"]), ["Ryan"])
+Test.assert_equals(friend(["Jimm", "Cari", "aret", "truehdnviegkwgvke", "sixtyiscooooool"]), ["Jimm", "Cari", "aret"])
+Test.assert_equals(friend(["Love", "Your", "Face", "1"]), ["Love", "Your", "Face"])
+
