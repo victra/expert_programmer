@@ -1016,3 +1016,86 @@ Test.assert_equals(friend(["Ryan", "Jimmy", "123", "4", "Cool Man"]), ["Ryan"])
 Test.assert_equals(friend(["Jimm", "Cari", "aret", "truehdnviegkwgvke", "sixtyiscooooool"]), ["Jimm", "Cari", "aret"])
 Test.assert_equals(friend(["Love", "Your", "Face", "1"]), ["Love", "Your", "Face"])
 
+#uppercase and replace char in string
+def proofread(string)
+  if string=="" then return "" end
+   a = string.downcase!.split(" ")
+   a.map{|x|x.gsub!("ie", "ei")}
+   s = a.join(" ").split(". ")
+   if s.length>1 
+     s.each{|x|x.capitalize!}
+     return s.join(". ")
+   else
+     return a.join(" ").capitalize!
+   end
+end
+#test
+Test.describe("Basic tests") do
+Test.assert_equals( proofread("SHe wEnt CaNoIenG."), "She went canoeing.")
+Test.assert_equals( proofread("He haD iEght ShOTs of CAffIEne"), "He had eight shots of caffeine")
+Test.assert_equals( proofread("THe neIghBour's ceiLing FEll on His Head. The WiEght of It crusHed him To thE gROuNd."), "The neighbour's ceiling fell on his head. The weight of it crushed him to the ground.")
+Test.assert_equals( proofread("ThE kiDs enJoYEd the SLiegh RidE."), "The kids enjoyed the sleigh ride.")
+Test.assert_equals( proofread("SHE did NOT diegn to GUESS her NIEGHBOUR'S wieght."), "She did not deign to guess her neighbour's weight.")
+Test.assert_equals( proofread("They had to fIEgn thIEr appreciation for her bIEge tights."), "They had to feign their appreciation for her beige tights.")
+Test.assert_equals( proofread("Niether of the fencers wanted to forfiet the match. They both expected to sieze victory."), "Neither of the fencers wanted to forfeit the match. They both expected to seize victory.")
+Test.assert_equals( proofread("Protien intAkE miGHt afFect aNy pOteNtIaL wieght LOSs."), "Protein intake might affect any potential weight loss." )
+Test.assert_equals( proofread("MargArEt cAn't eVen concIEve of foRegOing the pARty to finisH her paPEr."), "Margaret can't even conceive of foregoing the party to finish her paper." )
+Test.assert_equals( proofread("IN the wINter, it's NICE to gO for a sliegh rIDe"), "In the winter, it's nice to go for a sleigh ride")
+Test.assert_equals( proofread("The mAN's ONly pURpose in lIFe is to decIEve his wIFe."), "The man's only purpose in life is to deceive his wife.")
+Test.assert_equals( proofread("She LifTeD heR ViEL. The ShIeK LooKeD aT hER ExPeCtAnTlY"), "She lifted her veil. The sheik looked at her expectantly")
+Test.assert_equals( proofread("PetEr Was Not Sure of WHAt he WAs sEIEng. HE had To RIEn in HIs SHock."), "Peter was not sure of what he was seeing. He had to rein in his shock." )
+Test.assert_equals( proofread("That is OnE lonG frieghT traiN thAt's Blocking The Railway Crossing."), "That is one long freight train that's blocking the railway crossing.")
+Test.assert_equals( proofread(""), "")
+end
+
+#integer to string reverse and to array
+def digitize(n)
+  n.to_s.reverse.split('').map!{|x|x.to_i}
+end
+#other way
+def digitize(n)
+  n.to_s.split('').reverse!.map(&:to_i)
+end
+#test
+Test.assert_equals(digitize(35231),[1,3,2,5,3])
+
+#
+def solution(items, index, default_value)
+  items.fetch(index, default_value)
+end
+#test
+data = ['a', 'b', 'c']
+solution(data, 1, 'd') # should == 'b'
+solution(data, 5, 'd') # should == 'd'
+# negative values work as long as they aren't out of the length bounds
+solution(data, -1, 'd') # should == 'c'
+solution(data, -5, 'd') # should == 'd'
+
+#class
+class Person
+  def initialize(name)
+    @name = name
+  end
+  def name
+    return @name
+  end
+  def greet(yourName)
+    "Hello #{yourName}, my name is #{@name}"
+  end
+end
+#other way
+class Person
+  attr_reader :name
+  def initialize(name)
+    @name = name
+  end
+
+  def greet(yourName)
+    "Hello #{yourName}, my name is #{@name}"
+  end
+end
+#test
+joe = Person.new('Joe')
+joe.greet('Kate') # should return 'Hello Kate, my name is Joe'
+joe.name # should == 'Joe'
+
