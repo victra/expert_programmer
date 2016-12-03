@@ -1099,3 +1099,13 @@ joe = Person.new('Joe')
 joe.greet('Kate') # should return 'Hello Kate, my name is Joe'
 joe.name # should == 'Joe'
 
+#case
+def arithmetic(a, b, operator)
+  case operator
+    when "add" then return a+b
+    when "subtract" then return a-b
+    when "multiply" then return a*b
+    when "divide" then return a/b
+  end
+end
+
