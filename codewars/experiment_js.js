@@ -451,3 +451,12 @@ function joinStrings(string1, string2){
   Test.assertEquals(joinStrings('testing', 'testing'), 'testing testing');
   Test.assertEquals(joinStrings(134, 234), '134 234');
 
+//math
+function discoverOriginalPrice(discountedPrice, salePercentage){
+  return (discountedPrice*100)/(100-salePercentage)
+}
+//test
+Test.assertEquals(discoverOriginalPrice(75,25),100);
+Test.assertEquals(discoverOriginalPrice(25,75),100);
+Test.assertEquals(discoverOriginalPrice(75.75,25),101);
+
