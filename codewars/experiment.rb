@@ -1109,3 +1109,48 @@ def arithmetic(a, b, operator)
   end
 end
 
+#uppercase x times
+def accum(s)
+  a = s.split('')
+  a2 = []
+  for i in 1..a.length
+    if i==1 then a2 << a[i-1]*i
+    else a2 << (a[i-1]*i).capitalize! end
+  end
+  return a2.join('-')
+end
+#other way
+def accum(s)
+  s.chars.map.with_index { |char,index| (char*(index+1)).capitalize }.join("-")
+end
+#test
+Test.describe("accum") do
+    Test.it("Basic tests") do
+        Test.assert_equals(accum("ZpglnRxqenU"), "Z-Pp-Ggg-Llll-Nnnnn-Rrrrrr-Xxxxxxx-Qqqqqqqq-Eeeeeeeee-Nnnnnnnnnn-Uuuuuuuuuuu")
+        Test.assert_equals(accum("NyffsGeyylB"), "N-Yy-Fff-Ffff-Sssss-Gggggg-Eeeeeee-Yyyyyyyy-Yyyyyyyyy-Llllllllll-Bbbbbbbbbbb")
+        Test.assert_equals(accum("MjtkuBovqrU"), "M-Jj-Ttt-Kkkk-Uuuuu-Bbbbbb-Ooooooo-Vvvvvvvv-Qqqqqqqqq-Rrrrrrrrrr-Uuuuuuuuuuu")
+        Test.assert_equals(accum("EvidjUnokmM"), "E-Vv-Iii-Dddd-Jjjjj-Uuuuuu-Nnnnnnn-Oooooooo-Kkkkkkkkk-Mmmmmmmmmm-Mmmmmmmmmmm")
+        Test.assert_equals(accum("HbideVbxncC"), "H-Bb-Iii-Dddd-Eeeee-Vvvvvv-Bbbbbbb-Xxxxxxxx-Nnnnnnnnn-Cccccccccc-Ccccccccccc")
+   end
+end
+
+#get middle char of string
+def get_middle(s)
+  a=s.split('')
+  if a.length==1 || s=="" then return s
+  elsif a.length%2==0 then return a[a.length/2-1]+a[a.length/2]
+  else return a[a.length/2.round()] end
+end
+#other way
+def get_middle(s)
+  s[(s.size-1)/2..s.size/2]
+end
+#test
+Test.describe("Basic tests") do
+Test.assert_equals(get_middle("test"),"es")
+Test.assert_equals(get_middle("testing"),"t")
+Test.assert_equals(get_middle("middle"),"dd")
+Test.assert_equals(get_middle("A"),"A")
+Test.assert_equals(get_middle("of"),"of")
+end
+

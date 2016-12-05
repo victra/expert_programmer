@@ -451,7 +451,8 @@ function joinStrings(string1, string2){
   Test.assertEquals(joinStrings('testing', 'testing'), 'testing testing');
   Test.assertEquals(joinStrings(134, 234), '134 234');
 
-//math
+//math 
+https://www.codewars.com/kata/discover-the-original-price
 function discoverOriginalPrice(discountedPrice, salePercentage){
   return (discountedPrice*100)/(100-salePercentage)
 }
