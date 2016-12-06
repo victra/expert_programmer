@@ -1,3 +1,4 @@
+#the first python
 #if else
 def multiple(x):
     if x%3==0 and x%5==0:
