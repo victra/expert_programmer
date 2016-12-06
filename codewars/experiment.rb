@@ -1154,3 +1154,26 @@ Test.assert_equals(get_middle("A"),"A")
 Test.assert_equals(get_middle("of"),"of")
 end
 
+#get mean of mean
+def get_mean(arr,x,y)
+  q = 0
+  w = 0
+  if x<=1 || y<=1 then return -1 end
+  if x>arr.length || y>arr.length then return -1 end
+  for i in 0...x
+    q+=arr[i]
+  end
+  for i in 0...y
+    w+=arr[-(i+1)]
+  end
+  return ((q.to_f/x)+(w.to_f/y))/2
+end
+#test
+Test.describe("Basic tests") do
+Test.assert_equals(get_mean([1,3,2,4],2,3),2.5)
+Test.assert_equals(get_mean([1,3,2],2,2),2.25)
+Test.assert_equals(get_mean([1,3,2,4],1,2),-1)
+Test.assert_equals(get_mean([1,3,2,4],2,8),-1)
+Test.assert_equals(get_mean([1,-1,2,-1],2,3),0)
+end
+
