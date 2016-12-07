@@ -451,10 +451,18 @@ function joinStrings(string1, string2){
   Test.assertEquals(joinStrings('testing', 'testing'), 'testing testing');
   Test.assertEquals(joinStrings(134, 234), '134 234');
 
-//math 
-https://www.codewars.com/kata/discover-the-original-price
+//math integer to float 2 digit
 function discoverOriginalPrice(discountedPrice, salePercentage){
-  return (discountedPrice*100)/(100-salePercentage)
+  var a = (((discountedPrice*100)/(100-salePercentage)).toFixed(2)).split('.');
+  var i = Math.round((discountedPrice*100)/(100-salePercentage));
+  if(a[1]==00){
+    return i
+  }
+  return parseFloat(((discountedPrice*100)/(100-salePercentage)).toFixed(2));
+}
+//other way
+function discoverOriginalPrice(discountedPrice, salePercentage){
+  return Math.round(discountedPrice / (1 - salePercentage / 100) * 100) / 100;
 }
 //test
 Test.assertEquals(discoverOriginalPrice(75,25),100);
