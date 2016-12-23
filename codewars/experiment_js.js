@@ -153,8 +153,6 @@ function switchItUp(n){
 //test
 Test.assertEquals(switchItUp(3),"Three");
 
-alert server error
-https://www.codewars.com/kata/get-the-mean-of-an-array/train/javascript
 //average with floor result
 function getAverage(marks){
   var sum = 0;

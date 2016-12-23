@@ -1177,3 +1177,46 @@ Test.assert_equals(get_mean([1,3,2,4],2,8),-1)
 Test.assert_equals(get_mean([1,-1,2,-1],2,3),0)
 end
 
+#count char
+def count_char(string, char)
+  string.downcase.chars.inject(0){|sum,x| x==char.downcase ? sum+1 : sum+0}
+end
+#other way
+def count_char(string, char)
+  string.scan(/#{char}/i).size
+end
+#test
+describe 'Sample Tests' do
+  it "should count number of z in fizzbuzz" do
+    Test.assert_equals(count_char('fizzbuzz', 'z'), 4)
+  end
+end
+
+#get count plus and sum minus number
+def count_positives_sum_negatives(lst)
+  plus = 0
+  minus = 0
+  lst.each{|x|x>0 ? plus+=1 : minus+=x}
+  return [plus, minus]
+end
+#test
+Test.describe("Basic tests") do
+Test.assert_equals(count_positives_sum_negatives([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14, -15]),[10,-65])
+Test.assert_equals(count_positives_sum_negatives([0, 2, 3, 0, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14]),[8,-50])
+Test.assert_equals(count_positives_sum_negatives([1]),[1,0])
+Test.assert_equals(count_positives_sum_negatives([-1]),[0,-1])
+Test.assert_equals(count_positives_sum_negatives([0,0,0,0,0,0,0,0,0]),[0,0])
+end
+
+#array flatten by 1
+def flatten(array)
+  array.flatten(1)
+end
+#test
+Test.assert_equals flatten([]) , [], "[]"
+Test.assert_equals flatten([1,2,3]) , [1,2,3], "[1,2,3]" 
+Test.assert_equals flatten([[1,2,3],["a","b","c"],[1,2,3]]) , [1,2,3,"a","b","c",1,2,3], '[[1,2,3],["a","b","c"],[1,2,3]]'
+Test.assert_equals flatten([[1,2,3],["a","b","c"],[1,2,3],"a"]) , [1,2,3,"a","b","c",1,2,3,"a"], '[[1,2,3],["a","b","c"],[1,2,3],"a"]'
+Test.assert_equals flatten([[3,4,5],[[9,9,9]],["a,b,c"]]) , [3,4,5,[9,9,9],"a,b,c"], '[[3,4,5],[[9,9,9]],["a,b,c"]]'
+Test.assert_equals flatten([[[3],[4],[5]],[9],[9],[8],[[1,2,3]]]) , [[3],[4],[5],9,9,8,[1,2,3]], '[[3,4,5],[[9,9,9]],["a,b,c"]]'
+
