@@ -487,3 +487,20 @@ Test.describe('Static Tests', function () {
     });
 });
 
+//average array
+function find_average(array) {
+  var l = array.length;
+  var s = 0;
+  for(i=0;i<l;i++){
+    s+=array[i];
+  }
+  return s/l;
+}
+Test.assertEquals(find_average([1,1,1]), 1);
+Test.assertEquals(find_average([1,2,3]), 2);
+
+function find_average(array) {
+  return array.reduce((a, b) => (a + b)) / array.length;
+}
+
+//
